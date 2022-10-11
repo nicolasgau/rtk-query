@@ -1,4 +1,4 @@
-import {useGetAllModelApiQuery} from "../features/api/modelApi"
+import {useGetAllModelApiQuery} from "../store/features/api/modelApi"
 
 const Model = () => {
   const models = useGetAllModelApiQuery('COM')

@@ -1,6 +1,6 @@
 // Need to use the React-specific entry point to allow generating React hooks
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { Data } from '../../store/features/data/dataSlice'
+import { Data } from '../data/dataSlice'
 
 type Model = {
   label: string, 
