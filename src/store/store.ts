@@ -2,10 +2,7 @@ import { FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE } fro
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import { configureStore  } from "@reduxjs/toolkit"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
-import persistStore from "redux-persist/es/persistStore"
 import {modelApi} from '../features/api/modelApi'
-import counterReducer from './features/counter/counterSlice'
-import dataReducer from './features/data/dataSlice'
 import rootReducer, { RootState } from './rootReducer'
 
 const persistConfig = {
@@ -16,6 +13,7 @@ const persistConfig = {
 // const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const  store = configureStore({
+    // reducer: persistedReducer, 
     reducer: rootReducer, 
     middleware: ((getDefaultMiddleware)  => 
       getDefaultMiddleware(

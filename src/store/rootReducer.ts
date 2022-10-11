@@ -6,7 +6,7 @@ import {modelApi} from '../features/api/modelApi'
 const rootReducer = combineReducers({
     [modelApi.reducerPath]: modelApi.reducer,
     counter: counterReducer,
-    data: dataReducer
+    // data: dataReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

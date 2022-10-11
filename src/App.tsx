@@ -12,9 +12,9 @@ function App() {
   const count = useAppSelector(countValue) 
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    !count && dispatch(fetchData())
-  }, []) 
+  // useEffect(() => {
+  //   !count && dispatch(fetchData())
+  // }, []) 
 
   return (
     <div className="App">
