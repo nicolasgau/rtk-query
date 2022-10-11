@@ -1,27 +1,34 @@
-import rootReducer, { RootState } from "./rootReducer";
-import { persistReducer } from 'redux-persist'
+import { FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import persistStore from "redux-persist/es/persistStore";
+import { configureStore  } from "@reduxjs/toolkit"
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
+import persistStore from "redux-persist/es/persistStore"
+import {modelApi} from '../features/api/modelApi'
+import counterReducer from './features/counter/counterSlice'
+import dataReducer from './features/data/dataSlice'
+import rootReducer, { RootState } from './rootReducer'
 
 const persistConfig = {
   key: 'root',
   storage,
 }
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+// const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const  store = configureStore({
-    reducer: persistedReducer,
+    reducer: rootReducer, 
     middleware: ((getDefaultMiddleware)  => 
-      getDefaultMiddleware({
-        serializableCheck: false
-      })
+      getDefaultMiddleware(
+        {
+          serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+          },
+        }
+      ).concat([modelApi.middleware])
      )
 })
 
-export const persistedStore = persistStore(store)
+// export const persistedStore = persistStore(store)
 
 export default store
 
