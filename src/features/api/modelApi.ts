@@ -27,7 +27,7 @@ export const modelApi = createApi({
     getAllModelApi: builder.query<ModelsData[], string>({
       query: (ref) => `ajax_get_machines.php?gamme=${ref}`,
       // res is the data fetched and we transform it to be of ModelsData[] type
-      transformResponse: ((res: FetchedModelsData, meta, arg) => {
+      transformResponse: ((res: FetchedModelsData, _meta, _arg) => {
         let modelKeys = Object.keys(res) as string[]
         const result : ModelsData[] = modelKeys.map(key => {
           return { ref: key, ...res[key]}
